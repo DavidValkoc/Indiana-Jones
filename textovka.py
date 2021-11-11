@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import states
 
 if __name__ == '__main__':
     # banner
@@ -11,19 +12,22 @@ if __name__ == '__main__':
     print()
 
     # main loop
-    line = None
-    while line != 'koniec':
+    game_state = states.PLAYING
+    while game_state == states.PLAYING:
         # normalizing string
         line = input('> ').lower().strip()
 
-        if line in ('', 'koniec'):
+        if line == '':
             continue
 
-        elif line == 'o hre':
+        elif line in ('koniec', 'quit', 'bye', 'q'):
+            game_state = states.QUIT
+
+        elif line in ('o hre', 'about', 'info', '?'):
             print('(c)2021 created by mirek')
             print('Ďalšie veľké dobrodružstvo Indiana Jonesa. Tentokrá zápasí s jazykom Python v tmavej miestnosti.')
 
-        elif line == 'prikazy':
+        elif line in ('prikazy', 'commands', 'help', 'pomoc'):
             print('Zoznam príkazov v hre:')
             print('* koniec - ukončí rozohratú hru')
             print('* o hre - zobrazí informácie o hre')
@@ -32,4 +36,4 @@ if __name__ == '__main__':
         else:
             print('Taký príkaz nepoznám.')
 
-    print('(c)2021 by mirek mocný programátor')
+    print('(c)2021 by Hemisfer')
